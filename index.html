@@ -1,0 +1,398 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AeroManage | Airport Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <span class="brand-icon">✈</span>
+                <div>
+                    <h2>AeroManage</h2>
+                    <p>Airport Operations</p>
+                </div>
+            </div>
+
+            <p class="menu-heading">MAIN MENU</p>
+
+            <nav>
+                <a href="#dashboard" class="nav-link active">▦ Dashboard</a>
+                <a href="#passengers" class="nav-link">♙ Passengers</a>
+                <a href="#flights" class="nav-link">✈ Flights</a>
+                <a href="#processing" class="nav-link">✓ Passenger Processing</a>
+                <a href="#analytics" class="nav-link">▥ Analytics</a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="airport-status">
+                    <span class="status-dot"></span>
+                    <div>
+                        <strong>System Online</strong>
+                        <p>Demo Environment</p>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Header -->
+            <header class="topbar">
+
+                <div>
+                    <p class="eyebrow">AIRPORT OPERATIONS CENTER</p>
+                    <h1>Dashboard Overview</h1>
+                    <p class="muted">Monitor flights and passenger activity.</p>
+                </div>
+
+                <div class="header-right">
+                    <div class="clock-box">
+                        <span>LOCAL TIME</span>
+                        <strong id="clock">Loading...</strong>
+                    </div>
+
+                    <div class="admin-avatar">A</div>
+                </div>
+
+            </header>
+
+
+            <!-- Dashboard -->
+            <section id="dashboard">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Airport Statistics</h2>
+                        <p>Today's operational summary</p>
+                    </div>
+
+                    <span class="demo-badge">DEMO DATA</span>
+                </div>
+
+
+                <!-- Statistics Cards -->
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Total Flights</span>
+                            <span class="stat-icon blue">✈</span>
+                        </div>
+                        <h2 id="totalFlights">0</h2>
+                        <p>All scheduled flights</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Departures</span>
+                            <span class="stat-icon purple">↗</span>
+                        </div>
+                        <h2 id="totalDepartures">0</h2>
+                        <p>Outbound flights</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Arrivals</span>
+                            <span class="stat-icon green">↙</span>
+                        </div>
+                        <h2 id="totalArrivals">0</h2>
+                        <p>Inbound flights</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Travellers</span>
+                            <span class="stat-icon orange">♙</span>
+                        </div>
+                        <h2 id="totalPassengers">0</h2>
+                        <p>Registered passengers</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Passenger Processing Cards -->
+                <div class="section-heading processing-heading" id="processing">
+                    <div>
+                        <h2>Passenger Processing</h2>
+                        <p>Track the passenger journey</p>
+                    </div>
+                </div>
+
+                <div class="process-grid">
+
+                    <div class="process-card">
+                        <span class="process-number">01</span>
+                        <p>Checked In</p>
+                        <h2 id="checkedInCount">0</h2>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="checkedInBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="process-card">
+                        <span class="process-number">02</span>
+                        <p>Baggage Checked</p>
+                        <h2 id="baggageCount">0</h2>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="baggageBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="process-card">
+                        <span class="process-number">03</span>
+                        <p>Security Cleared</p>
+                        <h2 id="securityCount">0</h2>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="securityBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="process-card">
+                        <span class="process-number">04</span>
+                        <p>Boarded</p>
+                        <h2 id="boardedCount">0</h2>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="boardedBar"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Flights -->
+            <section class="content-section" id="flights">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Flight Information</h2>
+                        <p>Scheduled arrivals and departures</p>
+                    </div>
+                </div>
+
+                <div class="table-card">
+
+                    <div class="table-toolbar">
+
+                        <input
+                            type="text"
+                            id="flightSearch"
+                            placeholder="Search flight or destination..."
+                            aria-label="Search flights"
+                        >
+
+                        <select id="flightFilter" aria-label="Filter flights">
+                            <option value="All">All Flights</option>
+                            <option value="Departure">Departures</option>
+                            <option value="Arrival">Arrivals</option>
+                        </select>
+
+                    </div>
+
+                    <div class="table-scroll">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>FLIGHT</th>
+                                    <th>DESTINATION</th>
+                                    <th>TYPE</th>
+                                    <th>TIME</th>
+                                    <th>GATE</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="flightTableBody"></tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Passengers -->
+            <section class="content-section" id="passengers">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Traveller Management</h2>
+                        <p>Passenger records and travel status</p>
+                    </div>
+
+                    <button class="primary-button" id="addPassengerBtn">
+                        + Add Passenger
+                    </button>
+                </div>
+
+                <div class="table-card">
+
+                    <div class="table-toolbar">
+
+                        <input
+                            type="text"
+                            id="passengerSearch"
+                            placeholder="Search passenger or ID..."
+                            aria-label="Search passengers"
+                        >
+
+                        <select id="passengerStatusFilter" aria-label="Filter passengers">
+                            <option value="All">All Passengers</option>
+                            <option value="Checked In">Checked In</option>
+                            <option value="Baggage Checked">Baggage Checked</option>
+                            <option value="Security Cleared">Security Cleared</option>
+                            <option value="Boarded">Boarded</option>
+                        </select>
+
+                    </div>
+
+                    <div class="table-scroll">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>PASSENGER</th>
+                                    <th>PASSENGER ID</th>
+                                    <th>FLIGHT</th>
+                                    <th>SEAT</th>
+                                    <th>PROCESSING STATUS</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="passengerTableBody"></tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Analytics -->
+            <section class="content-section" id="analytics">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Operational Analytics</h2>
+                        <p>Passenger processing completion</p>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+
+                    <div class="analytics-info">
+                        <h3>Processing Completion</h3>
+                        <p>Percentage of registered passengers who have boarded.</p>
+                    </div>
+
+                    <div class="analytics-value" id="completionRate">0%</div>
+
+                    <div class="progress-track analytics-progress">
+                        <div class="progress-fill" id="completionBar"></div>
+                    </div>
+
+                    <p class="muted" id="analyticsSummary">
+                        Loading analytics...
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <footer>
+                AeroManage © 2026 | Airport Management System | Educational Demo
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- Add Passenger Modal -->
+    <div class="modal-overlay" id="passengerModal" hidden>
+
+        <div class="modal-card">
+
+            <div class="modal-header">
+                <div>
+                    <h2>Add Passenger</h2>
+                    <p>Enter sample passenger information.</p>
+                </div>
+
+                <button class="close-button" id="closeModalBtn" aria-label="Close form">
+                    ×
+                </button>
+            </div>
+
+            <form id="passengerForm">
+
+                <label for="passengerName">Full Name</label>
+                <input
+                    type="text"
+                    id="passengerName"
+                    maxlength="80"
+                    required
+                    placeholder="Enter passenger name"
+                >
+
+                <label for="passengerFlight">Flight Number</label>
+                <select id="passengerFlight" required></select>
+
+                <label for="passengerSeat">Seat Number</label>
+                <input
+                    type="text"
+                    id="passengerSeat"
+                    maxlength="5"
+                    required
+                    placeholder="Example: 12A"
+                >
+
+                <div class="modal-actions">
+                    <button type="button" class="secondary-button" id="cancelModalBtn">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="primary-button">
+                        Save Passenger
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Notifications -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+</body>
+
+</html>
+```
